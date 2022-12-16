@@ -1,0 +1,4 @@
+
+1. Tambah Gambar views/admin/home/index.php (jangan lupa tambahkan gambar)
+2. Hapus KOP pada nomor faktur controller Kasir
+3. edit coding pada views/layoutkasir/input.php

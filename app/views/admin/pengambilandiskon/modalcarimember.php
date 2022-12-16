@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/datatables/responsive/responsive.dataTables.min.css">
+<link rel="stylesheet" href="<?= base_url(); ?>assets/plugins/datatables/responsive/rowReorder.dataTables.min.css">
+<script src="<?= base_url(); ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables/responsive/dataTables.rowReorder.min.js"></script>
+<script src="<?= base_url(); ?>assets/plugins/datatables/responsive/dataTables.responsive.min.js"></script>
+<div class="modal fade" id="modalcarimember" tabindex="-1" role="dialog" aria-labelledby="modalcarimemberLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcarimemberLabel">Daftar Tabungan Diskon Member</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-sm" id="datacarimember" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Member</th>
+                                <th>Nama Member</th>
+                                <th>Total Tabungan</th>
+                                <th>Digunakan</th>
+                                <th>Diambil</th>
+                                <th>Sisa</th>
+                                <th>Pilih</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $nomor = 0;
+                            $totalsisadiskon = 0;
+                            foreach ($datamember->result_array() as $row) : $nomor++;
+                                $kodemember = $row['jualmemberkode'];
+                                // query memperoleh tabungan diskon
+                                $query_tabungandiskon = $this->db->query("SELECT IFNULL(ROUND(SUM(jualtotalbersih * ($diskonsetting / 100)),0),0) AS totaldiskon FROM penjualan WHERE jualmemberkode='$kodemember' AND DATE_FORMAT(jualtgl,'%Y-%m-%d')<='$tglsekarang' AND (jualstatusbayar='T' OR jualstatusbayar='K')")->row_array();
+
+                                $query_diskondigunakan = $this->db->query("SELECT IFNULL(SUM(jualtotalbersih),0) AS totaldigunakan FROM penjualan WHERE jualmemberkode='$kodemember' AND DATE_FORMAT(jualtgl,'%Y-%m-%d')<='$tglsekarang' AND jualstatusbayar='M'")->row_array();
+
+                                $query_diskondiambil = $this->db->query("SELECT IFNULL(SUM(detambiljumlah),0) AS totaldiambil FROM pengambilan_diskon_detail JOIN pengambilan_diskon ON  detambilkode=ambilkode WHERE detambilmemberkode = '$kodemember' AND ambiltgl <= '$tglsekarang'")->row_array();
+
+                                $totaldiskon = $query_tabungandiskon['totaldiskon'];
+                                $totaldigunakan = $query_diskondigunakan['totaldigunakan'];
+                                $totaldiambil = $query_diskondiambil['totaldiambil'];
+                                $sisadiskon = $totaldiskon - ($totaldigunakan + $totaldiambil);
+                                $totalsisadiskon = $totalsisadiskon + $sisadiskon;
+                            ?>
+                            <tr>
+                                <td><?= $nomor; ?></td>
+                                <td><?= $row['jualmemberkode']; ?></td>
+                                <td><?= $row['membernama']; ?></td>
+                                <td style="text-align: right;"><?= number_format($totaldiskon, 0, ",", ".") ?></td>
+                                <td style="text-align: right;"><?= number_format($totaldigunakan, 0, ",", "."); ?></td>
+                                <td style="text-align: right;"><?= number_format($totaldiambil, 0, ",", "."); ?></td>
+                                <td style="text-align: right;"><?= number_format($sisadiskon, 0, ",", "."); ?>
+                                    <input type="hidden" name="sisadiskon" id="sisadiskon" value="<?= $sisadiskon; ?>">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-primary"
+                                        onclick="pilihdata('<?= $row['jualmemberkode'] ?>','<?= $row['membernama'] ?>','<?= $sisadiskon ?>')">
+                                        Pilih
+                                    </button>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                        <tfoot>
+                            <tr style="text-align: center; font-weight: bold;">
+                                <td colspan="6">Total Tabungan Diskon Member</td>
+                                <td style="text-align: right;"><?= number_format($totalsisadiskon, 0, ",", "."); ?>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function pilihdata(kode, nama, sisa) {
+    $('#kodemember').val(kode);
+    $('#namamember').val(nama);
+    $('#totaltabungan').autoNumeric('set', sisa);
+    $('#modalcarimember').on('hidden.bs.modal', function(e) {
+        $('#jumlahambil').focus();
+    });
+    $('#modalcarimember').modal('hide');
+}
+$(document).ready(function() {
+    var table = $('#datacarimember').DataTable({
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true,
+
+    });
+});
+</script>

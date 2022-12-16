@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?= base_url('assets\css\cetak.css') ?>" type="text/css" media="print">
+    <title><?= strtoupper($namalaporan . '-' . $toko['nmtoko']) ?></title>
+    <style>
+    body {
+        font-family: 'Times New Roman', Times, serif;
+    }
+    </style>
+</head>
+
+<body onload="window.print();">
+    <div id="table-data">
+        <table style="width: 90%; border-collapse: collapse;" border="1" align="center">
+            <tr>
+                <td style="text-align: center;">
+                    <table align="center" style="width: 90%; font-size:11pt;">
+                        <tr>
+                            <td style="width:10%">
+                                <img style="width: 30%;" src="<?= base_url($toko['logo']) ?>" alt="">
+                            </td>
+                            <td style="text-align: center;">
+                                <span
+                                    style="font-size:12pt; font-weight: bold;"><?= strtoupper($toko['nmtoko'] . "<br>" . $namalaporan); ?><br><?= "Bulan :" . $bulan; ?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: center;">
+                                <hr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: left;">
+                                <table style="width: 100%; border-collapse: collapse;" border="1" cellpadding="3">
+                                    <thead>
+                                        <tr style="text-align: center;">
+                                            <th>No.Perkiraan</th>
+                                            <th>Nama Perkiraan</th>
+                                            <th>Awal</th>
+                                            <th>Akhir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $total_awal_akun1 = 0;
+                                        $total_akhir_akun1 = 0;
+                                        foreach ($dataakun1->result_array() as $a1) :
+                                            $noakun = $a1['noakun'];
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                    if ($a1['kat'] == '0') {
+                                                        echo "<strong>$a1[noakun]</strong>";
+                                                    } else {
+                                                        echo "$a1[noakun]";
+                                                    }
+                                                    ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if ($a1['kat'] == '0') {
+                                                        echo "<strong>$a1[namaakun]</strong>";
+                                                    } else {
+                                                        echo "$a1[namaakun]";
+                                                    }
+                                                    ?>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <?php
+                                                    $query_awal_lagi = $this->db->query("SELECT 
+                                                CASE a.`transjenis` WHEN 'K' THEN transjml ELSE 0 END AS masuk,
+                                                CASE a.`transjenis` WHEN 'D' THEN transjml ELSE 0 END AS keluar
+                                                FROM `neraca_transaksi` a WHERE a.`transnoakun` = '$noakun' AND DATE_FORMAT(transtgl,'%Y-%m') < '$bulan' ORDER BY transtgl ASC");
+
+                                                    if ($query_awal_lagi->num_rows() > 0) {
+                                                        $saldo_akhir_lama = 0;
+                                                        foreach ($query_awal_lagi->result_array() as $ykas) :
+                                                            $saldo_akhir_lama = ($saldo_akhir_lama + $ykas['masuk']) - $ykas['keluar'];
+                                                        endforeach;
+                                                    } else {
+                                                        $saldo_akhir_lama = 0;
+                                                    }
+                                                    echo number_format($saldo_akhir_lama, 0, ",", ".");
+                                                    $total_awal_akun1 = $total_awal_akun1 + $saldo_akhir_lama;
+                                                    ?>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <?php
+                                                    $query_akhir = $this->db->query("SELECT 
+                                                CASE a.`transjenis` WHEN 'K' THEN transjml ELSE 0 END AS masuk,
+                                                CASE a.`transjenis` WHEN 'D' THEN transjml ELSE 0 END AS keluar
+                                                FROM `neraca_transaksi` a WHERE a.`transnoakun` = '$noakun' AND DATE_FORMAT(transtgl,'%Y-%m') = '$bulan' ORDER BY transtgl ASC");
+
+                                                    if ($query_akhir->num_rows() > 0) {
+                                                        $saldo_akhir = 0;
+                                                        foreach ($query_akhir->result_array() as $akhir) :
+                                                            $saldo_akhir = ($saldo_akhir + $akhir['masuk']) - $akhir['keluar'];
+                                                        endforeach;
+                                                    } else {
+                                                        $saldo_akhir = 0;
+                                                    }
+
+                                                    $saldo_akhir = $saldo_akhir + $saldo_akhir_lama;
+                                                    echo number_format($saldo_akhir, 0, ",", ".");
+                                                    $total_akhir_akun1 = $total_akhir_akun1 + $saldo_akhir;
+                                                    ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                        <tr>
+                                            <th colspan="2" style="text-align: center;">Jumlah</th>
+                                            <td style="text-align: right; font-weight: bold;">
+                                                <?= number_format($total_awal_akun1, 0, ",", "."); ?>
+                                            </td>
+                                            <td style="text-align: right; font-weight: bold;">
+                                                <?= number_format($total_akhir_akun1, 0, ",", "."); ?>
+                                            </td>
+                                        </tr>
+
+
+                                        <?php
+                                        $total_awal_akun2 = 0;
+                                        $total_akhir_akun2 = 0;
+                                        foreach ($dataakun2->result_array() as $a2) :
+                                            $noakun2 = $a2['noakun'];
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                    if ($a2['kat'] == '0') {
+                                                        echo "<strong>$a2[noakun]</strong>";
+                                                    } else {
+                                                        echo "$a2[noakun]";
+                                                    }
+                                                    ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if ($a2['kat'] == '0') {
+                                                        echo "<strong>$a2[namaakun]</strong>";
+                                                    } else {
+                                                        echo "$a2[namaakun]";
+                                                    }
+                                                    ?>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <?php
+                                                    $query_awal_akun2 = $this->db->query("SELECT IFNULL(jmlsetdef,0) AS jmlawal FROM neraca_akun WHERE DATE_FORMAT(`tglsetdef`,'%Y-%m') < '$bulan' AND noakun='$noakun2'");
+                                                    $r_query_awal_akun2 = $query_awal_akun2->row_array();
+
+                                                    $x_awal_akun2 = $r_query_awal_akun2['jmlawal'];
+
+                                                    $query_awal_akun2_lagi = $this->db->query("SELECT 
+                                                CASE a.`transjenis` WHEN 'K' THEN transjml ELSE 0 END AS masuk,
+                                                CASE a.`transjenis` WHEN 'D' THEN transjml ELSE 0 END AS keluar
+                                                FROM `neraca_transaksi` a WHERE a.`transnoakun` = '$noakun2' AND DATE_FORMAT(transtgl,'%Y-%m') < '$bulan' ORDER BY transtgl ASC");
+
+                                                    if ($query_awal_akun2_lagi->num_rows() > 0) {
+                                                        $saldo_akhir_lama_akun2 = 0;
+                                                        foreach ($query_awal_akun2_lagi->result_array() as $yyy) :
+                                                            $saldo_akhir_lama_akun2 = ($saldo_akhir_lama_akun2 + $yyy['masuk']) - $yyy['keluar'];
+                                                        endforeach;
+                                                    } else {
+                                                        $saldo_akhir_lama_akun2 = 0;
+                                                    }
+
+                                                    $awal_baru_akun2 = $saldo_akhir_lama_akun2 + $x_awal_akun2;
+                                                    $total_awal_akun2 = $total_awal_akun2 + $awal_baru_akun2;
+                                                    echo number_format($awal_baru_akun2, 0, ",", ".");
+                                                    ?>
+
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <?php
+                                                    $query_akhir_akun2 = $this->db->query("SELECT 
+                                                    CASE a.`transjenis` WHEN 'K' THEN transjml ELSE 0 END AS masuk,
+                                                    CASE a.`transjenis` WHEN 'D' THEN transjml ELSE 0 END AS keluar
+                                                    FROM `neraca_transaksi` a WHERE a.`transnoakun` = '$noakun2' AND DATE_FORMAT(transtgl,'%Y-%m') = '$bulan' ORDER BY transtgl ASC");
+
+                                                    if ($query_akhir_akun2->num_rows() > 0) {
+                                                        $saldo_akhir_akun2 = 0;
+                                                        foreach ($query_akhir_akun2->result_array() as $akhir2) :
+                                                            $saldo_akhir_akun2 = ($saldo_akhir_akun2 + $akhir2['masuk']) - $akhir2['keluar'];
+                                                        endforeach;
+                                                    } else {
+                                                        $saldo_akhir_akun2 = 0;
+                                                    }
+                                                    $total_akhir_akun2 = $total_akhir_akun2 + $saldo_akhir_akun2;
+                                                    echo number_format($saldo_akhir_akun2, 0, ",", ".");
+                                                    ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+
+                                        <?php
+                                        $total_awal_akun3 = 0;
+                                        $total_akhir_akun3 = 0;
+                                        foreach ($dataakun3->result_array() as $a3) :
+                                            $noakun3 = $a3['noakun'];
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <?php
+                                                    if ($a3['kat'] == '0') {
+                                                        echo "<strong>$a3[noakun]</strong>";
+                                                    } else {
+                                                        echo "$a3[noakun]";
+                                                    }
+                                                    ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                    if ($a3['kat'] == '0') {
+                                                        echo "<strong>$a3[namaakun]</strong>";
+                                                    } else {
+                                                        echo "$a3[namaakun]";
+                                                    }
+                                                    ?>
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <?php
+                                                    // $query_awal_akun3 = $this->db->query("SELECT IFNULL(jmlsetdef,0) AS jmlawal FROM neraca_akun WHERE DATE_FORMAT(`tglsetdef`,'%Y-%m') < '$bulan' AND noakun='$noakun3'");
+                                                    // $r_query_awal_akun3 = $query_awal_akun3->row_array();
+
+                                                    // $x_awal_akun3 = $r_query_awal_akun3['jmlawal'];
+
+                                                    // $query_awal_akun3_lagi = $this->db->query("SELECT 
+                                                    // CASE a.`transjenis` WHEN 'K' THEN transjml ELSE 0 END AS masuk,
+                                                    // CASE a.`transjenis` WHEN 'D' THEN transjml ELSE 0 END AS keluar
+                                                    // FROM `neraca_transaksi` a WHERE a.`transnoakun` = '$noakun3' AND DATE_FORMAT(transtgl,'%Y-%m') < '$bulan' ORDER BY transtgl ASC");
+
+                                                    // if ($query_awal_akun3_lagi->num_rows() > 0) {
+                                                    //     $saldo_akhir_lama_akun3 = 0;
+                                                    //     foreach ($query_awal_akun3_lagi->result_array() as $yyyy) :
+                                                    //         $saldo_akhir_lama_akun3 = ($saldo_akhir_lama_akun3 + $yyyy['masuk']) - $yyyy['keluar'];
+                                                    //     endforeach;
+                                                    // } else {
+                                                    //     $saldo_akhir_lama_akun3 = 0;
+                                                    // }
+
+                                                    // $awal_baru_akun3 = $saldo_akhir_lama_akun3 + $x_awal_akun3;
+                                                    // $total_awal_akun3 = $total_awal_akun3 + $awal_baru_akun3;
+                                                    // echo number_format($awal_baru_akun3, 0, ",", ".");
+                                                    $modal_awal = $total_awal_akun1 - $total_awal_akun2;
+                                                    if ($a3['kat'] == 1) {
+                                                        echo number_format($modal_awal, 0, ",", ".");
+                                                    } else {
+                                                        echo '';
+                                                    }
+                                                    ?>
+
+                                            </td>
+                                            <td style="text-align: right;">
+                                                <?php
+                                                    // $query_akhir_akun3 = $this->db->query("SELECT 
+                                                    //     CASE a.`transjenis` WHEN 'K' THEN transjml ELSE 0 END AS masuk,
+                                                    //     CASE a.`transjenis` WHEN 'D' THEN transjml ELSE 0 END AS keluar
+                                                    //     FROM `neraca_transaksi` a WHERE a.`transnoakun` = '$noakun3' AND DATE_FORMAT(transtgl,'%Y-%m') = '$bulan' ORDER BY transtgl ASC");
+
+                                                    // if ($query_akhir_akun3->num_rows() > 0) {
+                                                    //     $saldo_akhir_akun3 = 0;
+                                                    //     foreach ($query_akhir_akun3->result_array() as $akhir3) :
+                                                    //         $saldo_akhir_akun3 = ($saldo_akhir_akun3 + $akhir3['masuk']) - $akhir3['keluar'];
+                                                    //     endforeach;
+                                                    // } else {
+                                                    //     $saldo_akhir_akun3 = 0;
+                                                    // }
+                                                    // $total_akhir_akun3 = $total_akhir_akun3 + $saldo_akhir_akun3;
+                                                    // echo number_format($saldo_akhir_akun3, 0, ",", ".");
+                                                    $modal_akhir = $total_akhir_akun1 - $total_akhir_akun2;
+                                                    if ($a3['kat'] == 1) {
+                                                        echo number_format($modal_akhir, 0, ",", ".");
+                                                    } else {
+                                                        echo '';
+                                                    }
+                                                    ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                        <tr>
+                                            <th colspan="2" style="text-align: center;">Jumlah</th>
+                                            <td style="text-align: right; font-weight: bold;">
+                                                <?= number_format($modal_awal + $total_awal_akun2, 0, ",", "."); ?>
+                                            </td>
+                                            <td style="text-align: right; font-weight: bold;">
+                                                <?= number_format($modal_akhir + $total_akhir_akun2, 0, ",", "."); ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+
+</html>

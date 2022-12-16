@@ -1,0 +1,252 @@
+/* CSS Document */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin:0px 10px 0px 10px; 
+ }
+ 
+ #page-SP {
+     clear: both;
+ 
+     font-family: "Tahoma", Times, serif, Helvetica, sans-serif;
+     font-size: 11px;
+     line-height: 14px;
+     margin:0px;
+     padding: 0.2cm 0.1cm 0cm 0.1cm;
+ }
+ 
+ #page-SP h2 {
+     font-size: 14px;
+     text-align: center; 
+     margin: 0px 0px 10px 0px;
+     padding: 0px 0px 0px 0px;
+ }
+ 
+ #page-SP h3 {
+     font-size: 18px;
+     text-align: center;
+     margin: 0px 0px 10px 0px;
+     padding: 0px 0px 0px 0px;
+ }
+ 
+ #page-SP h4 {
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 24px;
+     text-align: center;
+     margin: 0px 0px 10px 0px;
+     padding: 0px 0px 0px 0px;
+ }
+ 
+ #page-SP h5 {
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 10px;
+     text-align: center;
+     margin: 0px 0px 0px 0px;
+     padding: 0px 0px 0px 0px;
+ }
+ 
+ #page-SP p {
+     line-height: 14px;
+     margin: 0px 0px 0px 0px;
+     padding: 0px 0px 0px 0px;
+ }
+ 
+ #page-SP ul {
+     margin: 10px 0px 0px 0px;
+     padding: 0px 0px 0px 1.0cm;
+ }
+ 
+ #page-SP li {
+     text-align: justify;
+     list-style-type: decimal;
+     list-style-position: outside;
+     margin: 0px 0px 0px 0px;
+     padding: 1px 0px 2px 0px;
+ }
+ 
+ .logo {
+     float: left;
+     position: absolute;
+     left: 1.0cm;
+     top: 0.1cm;
+     z-index: 6;
+     margin: 0px 0px 0px 0px;
+     padding: 0px 0px 0px 0px;
+ }
+ 
+ 
+ p{
+     margin:0px 0px 0px 3px;
+ }
+ h1 {
+     text-align:center;
+        font-size: 15pt;
+        margin: 0px 0px 10px 0px ;
+ }
+ 
+ h2 {
+    font-size: 13pt;
+ }
+ 
+ h3 {
+     
+    font-size: 11pt;
+ }
+ 
+ h4 {
+    font-size: 9pt;
+ }
+ 
+ hr {
+    clear: both;
+ }
+ 
+ img {
+    margin: 2px;
+ }
+ 
+ div.page-portrait-list {
+    visibility: visible;
+    font-family: Tahoma;
+    font-size: 11px;
+    margin: auto;
+    width: 17cm;
+ }
+ 
+ .table-list{
+     font-family: Tahoma;
+     font-size: 11px;
+    border-collapse: collapse;
+    border: 1px solid #000;
+ }
+ 
+ #table-data table {
+    border-collapse: collapse;
+ }
+ #table-data h1{
+ font-family:Tahoma;
+ padding:2px;
+ margin:0px;
+ font-size:18px;
+ }
+ 
+ #table-data h2{
+ font-family:Tahoma;
+ padding:0px;
+ margin:0px;
+ font-size:13px;
+ }
+ #table-data h3{
+ font-family:Tahoma;
+ padding:0px;
+ font-size:16px;
+ margin:0px;
+ }
+ 
+ #table-data tr th {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: #eee;
+    padding: 1px;
+    vertical-align: center;	
+ }
+ 
+ #table-data tr td {
+   font-family: 'Times New Roman', Times, serif;
+    padding: 2px 1px;
+    vertical-align: center;
+ }
+ #table-datax table {
+    border-collapse: collapse;
+    width:97%;
+     
+ }
+ #table-datax h1{
+ font-family:Tahoma;
+ padding:2px;
+ margin:0px;
+ font-size:18px;
+ }
+ 
+ #table-datax h2{
+ font-family:Tahoma;
+ padding:0px;
+ margin:0px;
+ font-size:18px;
+ }
+ #table-datax h3{
+ font-family:Tahoma;
+ padding:0px;
+ font-size:16px;
+ margin:0px;
+ }
+ 
+ #table-datax tr th {
+    font-family: Tahoma;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #eee;
+    padding: 1px;
+ 
+ }
+ 
+ #table-datax tr td {
+    font-family: Tahoma;
+    font-size: 11px;
+    padding: 2px 4px;
+    vertical-align: top;
+ }
+ #table-data2 table {
+    border-collapse: collapse;
+ }
+ 
+ #table-data2 tr th {
+    font-family: Tahoma;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #eee;
+    padding: 2px;
+ 
+ }
+ 
+ #table-data2 tr td {
+    font-family: Tahoma;
+    font-size: 11px;
+    padding: 2px;
+    border: 2px solid #ccc;
+    vertical-align: top;
+ }
+ 
+ .table-list td {
+    font-family: Tahoma;
+    font-size: 11px;
+    padding: 4px;
+ 
+ /*   border: 1px solid #000;*/
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+ }
+ 
+ .table-list th {
+    font-family: Tahoma;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px;
+ /*   border: 1px solid #000;*/
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+ }
+ 
+ div.page-break {
+    visibility: visible;
+    page-break-after: always;
+ }
+
+ @media print{
+    @page{
+       size: A4;
+    }
+
+    body{
+       margin: 0;
+    }
+ }

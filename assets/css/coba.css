@@ -1,0 +1,16 @@
+@media screen{
+    div::before {
+		content: "";
+		display: block;
+		/* Give a sufficient height to this element so that its drop shadow is properly rendered */
+		height: 0.8cm;
+		/* Offset the negative extra margin at the left of the non-pseudo element */
+		margin-left: 0.5cm;
+		/* Offset the negative extra margin at the right of the non-pseudo element */
+		margin-right: 0.5cm;
+		/* Make the bottom area appear as a part of the page margins of the upper virtual page */
+		background-color: #fff;
+		/* Show a drop shadow beneath the upper virtual page */
+		box-shadow: 0 6px 5px rgba(75, 75, 75, 0.2);
+	}
+}
