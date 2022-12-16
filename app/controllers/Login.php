@@ -9,25 +9,10 @@ class Login extends CI_Controller
     }
     public function index()
     {
-        if ($this->session->userdata('masuk') == true) {
-            if ($this->session->userdata('idgrup') == '1') {
-                redirect('admin/home/index');
-            } else if ($this->session->userdata('idgrup') == '2') {
-                redirect('k/home/index');
-            } else {
-                redirect('login/logout');
-            }
-        } else {
-            //Ambil Data toko
-            $toko = $this->toko->datatoko();
-            $rtoko = $toko->row_array();
-            $data = [
-                'logo' => $rtoko['logo'],
-                'namatoko' => $rtoko['nmtoko'],
-                'datauser' => $this->db->get('nn_users')
-            ];
-            $this->load->view('login/index', $data);
-        }
+        $data = [
+            'datauser' => $this->db->get('nn_users')
+        ];
+        $this->load->view('login/index', $data);
     }
 
     public function validasi_user()
@@ -134,6 +119,6 @@ class Login extends CI_Controller
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect('login/index');
+        redirect('login');
     }
 }
