@@ -66,3 +66,6 @@ database/
 db/
 sess_kopmart/
 db_backup/
+
+# App Content
+app_content
