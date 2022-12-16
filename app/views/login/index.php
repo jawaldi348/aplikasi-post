@@ -2,15 +2,16 @@
 <html>
 
 <head>
+    <?php $toko = $this->common->get_toko() ?>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Halaman Login | <?= $namatoko; ?></title>
+    <title>Login | <?= $toko['toko'] ?></title>
     <meta content="Admin Dashboard" name="Novinaldi" />
     <meta content="Mannatthemes" name="Novinaldi" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="<?php echo base_url($logo) ?>">
+    <link rel="shortcut icon" href="<?= $toko['logo'] ?>">
 
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="<?php echo base_url() ?>assets/css/icons.css" rel="stylesheet" type="text/css">
@@ -44,7 +45,7 @@
             <div class="card-body">
 
                 <h3 class="text-center mt-0 m-b-15">
-                    <a href="<?= site_url(); ?>" class="logo logo-admin"><img src="<?= base_url($logo) ?>" height="150" alt="logo Belum Ada"></a>
+                    <a href="<?= site_url(); ?>" class="logo logo-admin"><img src="<?= $toko['logo'] ?>" height="150" alt="<?= $toko['toko'] ?>"></a>
                 </h3>
 
                 <div class="p-3">
