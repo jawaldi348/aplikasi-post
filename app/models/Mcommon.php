@@ -7,7 +7,8 @@ class Mcommon extends CI_Model
     {
         $sql = $this->db->where('id_bisnis', 1)->get('bisnis')->row_array();
         $data = [
-            'toko' => $sql['nama_bisnis'],
+            'idbisnis' => $sql['id_bisnis'],
+            'bisnis' => $sql['nama_bisnis'],
             'logo' => $sql['logo_bisnis'] == '' || !file_exists('app_content/' . $sql['logo_bisnis']) ? '' : base_url() . 'app_content/' . $sql['logo_bisnis']
         ];
         return $data;
