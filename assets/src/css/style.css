@@ -1,0 +1,9 @@
+.input-error {
+    border-color: #ec536c;
+}
+
+.error-text {
+    font-size: 12px;
+    color: #ec536c;
+    margin-top: 5px;
+}

@@ -5,6 +5,10 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = TRUE;
 
+$route['login'] = 'auth/login';
+$route['login/validasi-user'] = 'auth/login/validasi_user';
+$route['logout'] = 'auth/logout';
+
 $route['beli/(:any)'] = 'admin/pembelian/$1';
 $route['beli/(:any)/(:any)'] = 'admin/pembelian/$1/$2';
 $route['pemasok/(:any)'] = 'admin/pemasok/$1';

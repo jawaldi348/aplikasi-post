@@ -11,10 +11,10 @@ class Welcome extends CI_Controller
 			} else if ($this->session->userdata('idgrup') == '2') {
 				redirect('k/home/index');
 			} else {
-				redirect('login/logout');
+				redirect('logout');
 			}
 		} else {
-			redirect('login/logout');
+			redirect('logout');
 		}
 	}
 }
