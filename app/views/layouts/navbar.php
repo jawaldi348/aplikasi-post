@@ -7,7 +7,7 @@ $group = $session['idgroup']; ?>
             <?php if ($group == '1') : ?>
                 <ul class="navigation-menu">
                     <li class="has-submenu <?= $uri == null || $uri == 'welcome' ? 'active' : null ?>">
-                        <a href="<?= site_url('admin/home/index') ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
+                        <a href="<?= site_url() ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
                     </li>
                     <li class="has-submenu">
                         <a href="#"><i class="fa fa-file"></i> Master</a>
