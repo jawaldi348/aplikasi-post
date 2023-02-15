@@ -1,10 +1,11 @@
 @extends(layouts/index)
 @section(content)
 <?php
+$session = $this->session->userdata('userData');
 if ($this->session->userdata('fotouser') == '' || $this->session->userdata('fotouser') == null || !file_exists($this->session->userdata('fotouser'))) {
     $fotouser = "./assets/images/users/avatar.png";
 } else {
-    $fotouser = $this->session->userdata('fotouser');
+    $fotouser = $session['foto'];
 }
 ?>
 <div class="col-lg-12">
@@ -20,7 +21,7 @@ if ($this->session->userdata('fotouser') == '' || $this->session->userdata('foto
                                     <img src="<?= base_url($fotouser) ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h6 class="card-title" style="border-bottom: 2px solid blue;">
-                                            <?= $this->session->userdata('namalengkapuser'); ?></h6>
+                                            <?= $session['nama'] ?></h6>
                                     </div>
                                 </div>
                             </a>
@@ -37,7 +38,6 @@ if ($this->session->userdata('fotouser') == '' || $this->session->userdata('foto
                             <div class="card-header bg-info text-white">Transaksi Semua Penjualan</div>
                             <div class="card-body">
                                 <?php
-                                $username = $this->session->userdata('username');
                                 $penjualan_hariini = $this->db->query("SELECT IFNULL(SUM(jualtotalbersih),0) AS totalhariini FROM penjualan WHERE DATE_FORMAT(jualtgl,'%Y-%m-%d') = CURRENT_DATE()")->row_array();
 
                                 $penjualan_bulanini = $this->db->query("SELECT IFNULL(SUM(jualtotalbersih),0) AS totalhariini FROM penjualan WHERE DATE_FORMAT(jualtgl,'%Y-%m') = DATE_FORMAT(CURRENT_DATE(),'%Y-%m')")->row_array();
