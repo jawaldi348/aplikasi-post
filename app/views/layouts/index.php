@@ -11,6 +11,7 @@
 
     <link rel="shortcut icon" href="<?= logo() ?>">
 
+    @provide(style)
     <link href="<?= assets() ?>css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= assets() ?>css/icons.css" rel="stylesheet">
     <link href="<?= assets() ?>css/style.css" rel="stylesheet">
@@ -66,6 +67,7 @@
     <script src="<?= assets() ?>js/jquery.slimscroll.js"></script>
     <script src="<?= assets() ?>js/jquery.nicescroll.js"></script>
     <script src="<?= assets() ?>js/jquery.scrollTo.min.js"></script>
+    @provide(script)
     <script src="<?= assets() ?>js/app.js"></script>
     <script src="<?= assets() ?>plugins/fontawesome/js/all.min.js"></script>
     <script src="<?= assets() ?>plugins/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
