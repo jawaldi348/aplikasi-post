@@ -23,25 +23,16 @@ class Login extends CI_Controller
             $post = $this->input->post(null, TRUE);
             $data = $check_user->row_array();
             $bisnis = $this->common->get_bisnis();
-            $user_data = [
-                'masuk' => true,
-                'userid' => $data['id_user'],
-                'namalengkapuser' => $data['nama_user'],
-                'username' => $data['username'],
-                'fotouser' => $data['foto_user'],
-                'idgrup' => $data['idgroup_user'],
-                'idtoko' => $bisnis['idbisnis'],
-                'logo' => $bisnis['logo'],
-                'namatoko' => $bisnis['bisnis'],
-                'namagrup' => 'Administrator'
-            ];
-            $this->session->set_userdata($user_data);
-            // $user_data = array(
-            //     'login_auth' => TRUE,
-            //     'status_login' => 'success',
-            //     'iduser' => $data['id_user']
-            // );
-            // $this->session->set_userdata('userData', $user_data);
+            $user_data = array(
+                'login_auth' => TRUE,
+                'status_login' => 'success',
+                'iduser' => $data['id_user'],
+                'nama' => $data['nama_user'],
+                'foto' => $data['foto_user'],
+                'idgroup' => $data['idgroup_user'],
+                'idbisnis' => $bisnis['idbisnis'],
+            );
+            $this->session->set_userdata('userData', $user_data);
             $resp = [
                 'status' => true,
                 'message' => 'Anda berhasil login',

@@ -4,7 +4,9 @@ if (!function_exists('check_logged_in')) {
     function check_logged_in()
     {
         $CI = &get_instance();
-        if ($CI->session->userdata('masuk') != true) :
+        $session = $CI->session->userdata('userData');
+        $status = empty($session) ? '' : $session['status_login'];
+        if ($status != 'success') :
             redirect('logout');
             exit;
         endif;
