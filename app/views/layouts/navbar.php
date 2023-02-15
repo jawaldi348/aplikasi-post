@@ -1,8 +1,10 @@
-<?php $uri = $this->uri->segment(2) ?>
+<?php $uri = $this->uri->segment(2);
+$session = $this->session->userdata('userData');
+$group = $session['idgroup']; ?>
 <div class="navbar-custom">
     <div class="container-fluid">
         <div id="navigation">
-            <?php if ($this->session->userdata('idgrup') == '1') : ?>
+            <?php if ($group == '1') : ?>
                 <ul class="navigation-menu">
                     <li class="has-submenu <?php if ($uri == 'home') echo 'active'; ?>">
                         <a href="<?= site_url('admin/home/index') ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
@@ -179,7 +181,7 @@
                         <a href="<?= site_url('utility/index') ?>"><i class="fa fa-fw fa-cogs"></i> Utility</a>
                     </li>
                 </ul>
-            <?php elseif ($this->session->userdata('idgrup') == '2') : ?>
+            <?php elseif ($group == '2') : ?>
                 <ul class="navigation-menu">
                     <li class="has-submenu <?php if ($uri == 'home') echo 'active'; ?>">
                         <a href="<?= site_url('k/home/index') ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
@@ -204,7 +206,7 @@
                         </a>
                     </li>
                 </ul>
-            <?php elseif ($this->session->userdata('idgrup') == '4') : ?>
+            <?php elseif ($group == '4') : ?>
                 <ul class="navigation-menu">
                     <li class="has-submenu<?php if ($uri == 'home') echo 'active'; ?>">
                         <a href="<?= site_url('p/home/index') ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
