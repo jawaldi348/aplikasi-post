@@ -1,3 +1,5 @@
+@extends(layouts/index)
+@section(content)
 <?php
 if ($this->session->userdata('fotouser') == '' || $this->session->userdata('fotouser') == null || !file_exists($this->session->userdata('fotouser'))) {
     $fotouser = "./assets/images/users/avatar.png";
@@ -101,8 +103,7 @@ if ($this->session->userdata('fotouser') == '' || $this->session->userdata('foto
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <span class="card-subtitle mb-2 text-muted">
-                                            Faktur Jatuh Tempo 3 Hari Terakhir : <a
-                                                href="<?= site_url('beli/faktur-jatuh-tempo') ?>"><?= $totalhutang_jatuhtempo; ?></a>
+                                            Faktur Jatuh Tempo 3 Hari Terakhir : <a href="<?= site_url('beli/faktur-jatuh-tempo') ?>"><?= $totalhutang_jatuhtempo; ?></a>
                                         </span>
                                     </div>
                                     <div class="col-lg-4">
@@ -126,8 +127,7 @@ if ($this->session->userdata('fotouser') == '' || $this->session->userdata('foto
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">Input Bulan</label>
                             <div class="col-sm-6">
-                                <input type="month" class="form-control-sm form-control" name="bulan" id="bulan"
-                                    value="<?= date('Y-m'); ?>">
+                                <input type="month" class="form-control-sm form-control" name="bulan" id="bulan" value="<?= date('Y-m'); ?>">
                             </div>
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-sm btn-success btntampilgrafikpenjualan">
@@ -163,8 +163,7 @@ if ($this->session->userdata('fotouser') == '' || $this->session->userdata('foto
                         <div class="form-group row">
                             <label for="" class="col-sm-2 col-form-label">Input Bulan</label>
                             <div class="col-sm-6">
-                                <input type="month" class="form-control-sm form-control" id="bulanproduklaku"
-                                    value="<?= date('Y-m'); ?>">
+                                <input type="month" class="form-control-sm form-control" id="bulanproduklaku" value="<?= date('Y-m'); ?>">
                             </div>
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-sm btn-success btntampilgrafikproduklaku">
@@ -182,86 +181,87 @@ if ($this->session->userdata('fotouser') == '' || $this->session->userdata('foto
     </div>
 </div>
 <script>
-function tampilgrafikbelanjamember() {
-    $.ajax({
-        type: "post",
-        url: "<?= site_url('laporan/grafik_penjualanmember') ?>",
-        data: {
-            tahun: $('#tahunbelanjamember').val()
-        },
-        dataType: "json",
-        beforeSend: function() {
-            $('.viewgrafikbelanjamember').html('<i class="fa fa-spin fa-spinner"></i> Tunggu').fadeIn();
-        },
-        success: function(response) {
-            if (response.data) {
-                $('.viewgrafikbelanjamember').html(response.data).show();
+    function tampilgrafikbelanjamember() {
+        $.ajax({
+            type: "post",
+            url: "<?= site_url('laporan/grafik_penjualanmember') ?>",
+            data: {
+                tahun: $('#tahunbelanjamember').val()
+            },
+            dataType: "json",
+            beforeSend: function() {
+                $('.viewgrafikbelanjamember').html('<i class="fa fa-spin fa-spinner"></i> Tunggu').fadeIn();
+            },
+            success: function(response) {
+                if (response.data) {
+                    $('.viewgrafikbelanjamember').html(response.data).show();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                    thrownError);
             }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.responseText + "\n" +
-                thrownError);
-        }
-    });
-}
+        });
+    }
 
-function tampilgrafikpenjualan() {
-    $.ajax({
-        type: "post",
-        url: "<?= site_url('laporan/tampil-grafik-penjualan-perbulan') ?>",
-        data: {
-            bulan: $('#bulan').val()
-        },
-        dataType: "json",
-        beforeSend: function() {
-            $('.viewtampilgrafik').html('<i class="fa fa-spin fa-spinner"></i> Tunggu').fadeIn();
-        },
-        success: function(response) {
-            if (response.data) {
-                $('.viewtampilgrafik').html(response.data).show();
+    function tampilgrafikpenjualan() {
+        $.ajax({
+            type: "post",
+            url: "<?= site_url('laporan/tampil-grafik-penjualan-perbulan') ?>",
+            data: {
+                bulan: $('#bulan').val()
+            },
+            dataType: "json",
+            beforeSend: function() {
+                $('.viewtampilgrafik').html('<i class="fa fa-spin fa-spinner"></i> Tunggu').fadeIn();
+            },
+            success: function(response) {
+                if (response.data) {
+                    $('.viewtampilgrafik').html(response.data).show();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                    thrownError);
             }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.responseText + "\n" +
-                thrownError);
-        }
-    });
-}
+        });
+    }
 
-function tampilgrafikproduklaku() {
-    $.ajax({
-        url: "<?= site_url('laporan/grafikproduklaku') ?>",
-        dataType: "json",
-        type: 'post',
-        data: {
-            bulan: $('#bulanproduklaku').val()
-        },
-        beforeSend: function() {
-            $('.viewgrafikproduklaku').html(
-                '<i class="fa fa-spin fa-spinner"></i> Tunggu Grafik sedang ditampilkan').fadeIn();
-        },
-        success: function(response) {
-            if (response.data) {
-                $('.viewgrafikproduklaku').html(response.data).show();
+    function tampilgrafikproduklaku() {
+        $.ajax({
+            url: "<?= site_url('laporan/grafikproduklaku') ?>",
+            dataType: "json",
+            type: 'post',
+            data: {
+                bulan: $('#bulanproduklaku').val()
+            },
+            beforeSend: function() {
+                $('.viewgrafikproduklaku').html(
+                    '<i class="fa fa-spin fa-spinner"></i> Tunggu Grafik sedang ditampilkan').fadeIn();
+            },
+            success: function(response) {
+                if (response.data) {
+                    $('.viewgrafikproduklaku').html(response.data).show();
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" +
+                    thrownError);
             }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(xhr.status + "\n" + xhr.responseText + "\n" +
-                thrownError);
-        }
-    });
-}
-$(document).ready(function() {
-    tampilgrafikpenjualan();
-    tampilgrafikproduklaku();
-    tampilgrafikbelanjamember();
-    $('.btntampilgrafikpenjualan').click(function(e) {
-        e.preventDefault();
+        });
+    }
+    $(document).ready(function() {
         tampilgrafikpenjualan();
-    });
-    $('.btntampilgrafikproduklaku').click(function(e) {
-        e.preventDefault();
         tampilgrafikproduklaku();
+        tampilgrafikbelanjamember();
+        $('.btntampilgrafikpenjualan').click(function(e) {
+            e.preventDefault();
+            tampilgrafikpenjualan();
+        });
+        $('.btntampilgrafikproduklaku').click(function(e) {
+            e.preventDefault();
+            tampilgrafikproduklaku();
+        });
     });
-});
 </script>
+@endsection
