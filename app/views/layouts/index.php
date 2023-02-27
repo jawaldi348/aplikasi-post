@@ -68,6 +68,9 @@
     <script src="<?= assets() ?>js/jquery.slimscroll.js"></script>
     <script src="<?= assets() ?>js/jquery.nicescroll.js"></script>
     <script src="<?= assets() ?>js/jquery.scrollTo.min.js"></script>
+    <script>
+        BASE_URL = '<?= site_url() ?>';
+    </script>
     @provide(script)
     <script src="<?= assets() ?>js/app.js"></script>
     <script src="<?= assets() ?>plugins/fontawesome/js/all.min.js"></script>
