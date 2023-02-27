@@ -19,6 +19,7 @@
     <link href="<?= assets() ?>plugins/fontawesome/css/all.min.css" rel="stylesheet">
     <link href="<?= assets() ?>plugins/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet">
     <link href="<?= assets() ?>plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="<?= assets() ?>src/css/style.css" rel="stylesheet">
 </head>
 
 <body>
