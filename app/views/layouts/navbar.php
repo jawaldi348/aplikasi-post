@@ -9,14 +9,14 @@ $group = $session['idgroup']; ?>
                     <li class="has-submenu <?= $uri == null || $uri == 'welcome' ? 'active' : null ?>">
                         <a href="<?= site_url() ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
                     </li>
-                    <li class="has-submenu">
+                    <li class="has-submenu <?= in_array($uri, ['satuan']) ? 'active' : '' ?>">
                         <a href="#"><i class="fa fa-file"></i> Master</a>
                         <ul class="submenu">
                             <li>
                                 <a href="<?= site_url('admin/produk/home') ?>"><i class="fa fa-fw fa-tasks"></i> Produk</a>
                             </li>
-                            <li>
-                                <a href="<?= site_url('admin/satuan/index') ?>"><i class="fa fa-fw fa-tasks"></i> Satuan</a>
+                            <li class="<?= $uri == 'satuan' ? ' active' : null ?>">
+                                <a href="<?= site_url('satuan') ?>"><i class="fa fa-fw fa-tasks"></i> Satuan</a>
                             </li>
                             <li>
                                 <a href="<?= site_url('admin/kategori/index') ?>"><i class="fa fa-fw fa-tasks"></i> Kategori</a>

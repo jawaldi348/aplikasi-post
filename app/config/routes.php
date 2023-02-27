@@ -9,6 +9,14 @@ $route['login'] = 'auth/login';
 $route['login/validasi-user'] = 'auth/login/validasi_user';
 $route['logout'] = 'auth/logout';
 
+$route['satuan'] = 'produk/satuan';
+$route['satuan/data'] = 'produk/satuan/data';
+$route['satuan/create'] = 'produk/satuan/create';
+$route['satuan/store'] = 'produk/satuan/store';
+$route['satuan/show'] = 'produk/satuan/show';
+$route['satuan/update'] = 'produk/satuan/update';
+$route['satuan/destroy'] = 'produk/satuan/destroy';
+
 $route['beli/(:any)'] = 'admin/pembelian/$1';
 $route['beli/(:any)/(:any)'] = 'admin/pembelian/$1/$2';
 $route['pemasok/(:any)'] = 'admin/pemasok/$1';
