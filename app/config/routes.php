@@ -17,6 +17,14 @@ $route['satuan/show'] = 'produk/satuan/show';
 $route['satuan/update'] = 'produk/satuan/update';
 $route['satuan/destroy'] = 'produk/satuan/destroy';
 
+$route['kategori'] = 'produk/kategori';
+$route['kategori/data'] = 'produk/kategori/data';
+$route['kategori/create'] = 'produk/kategori/create';
+$route['kategori/store'] = 'produk/kategori/store';
+$route['kategori/show'] = 'produk/kategori/show';
+$route['kategori/update'] = 'produk/kategori/update';
+$route['kategori/destroy'] = 'produk/kategori/destroy';
+
 $route['beli/(:any)'] = 'admin/pembelian/$1';
 $route['beli/(:any)/(:any)'] = 'admin/pembelian/$1/$2';
 $route['pemasok/(:any)'] = 'admin/pemasok/$1';
