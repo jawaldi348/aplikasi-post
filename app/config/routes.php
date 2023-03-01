@@ -33,6 +33,16 @@ $route['pemasok/show'] = 'kontak/pemasok/show';
 $route['pemasok/update'] = 'kontak/pemasok/update';
 $route['pemasok/destroy'] = 'kontak/pemasok/destroy';
 
+$route['member'] = 'kontak/member';
+$route['member/data'] = 'kontak/member/data';
+$route['member/create'] = 'kontak/member/create';
+$route['member/store'] = 'kontak/member/store';
+$route['member/show'] = 'kontak/member/show';
+$route['member/update'] = 'kontak/member/update';
+$route['member/destroy'] = 'kontak/member/destroy';
+$route['member/detail/(:any)'] = 'kontak/member/detail/$1';
+$route['member/cetak-kartu/(:any)'] = 'kontak/member/cetak_kartu/$1';
+
 $route['beli/(:any)'] = 'admin/pembelian/$1';
 $route['beli/(:any)/(:any)'] = 'admin/pembelian/$1/$2';
 $route['pemasok/(:any)'] = 'admin/pemasok/$1';

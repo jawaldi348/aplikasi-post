@@ -9,7 +9,7 @@ $group = $session['idgroup']; ?>
                     <li class="has-submenu <?= $uri == null || $uri == 'welcome' ? 'active' : null ?>">
                         <a href="<?= site_url() ?>"><i class="fa fa-fw fa-tachometer-alt"></i> Dashboard</a>
                     </li>
-                    <li class="has-submenu <?= in_array($uri, ['satuan', 'kategori', 'pemasok']) ? 'active' : '' ?>">
+                    <li class="has-submenu <?= in_array($uri, ['satuan', 'kategori', 'pemasok', 'member']) ? 'active' : '' ?>">
                         <a href="#"><i class="fa fa-file"></i> Master</a>
                         <ul class="submenu">
                             <li>
@@ -24,10 +24,8 @@ $group = $session['idgroup']; ?>
                             <li class="<?= $uri == 'pemasok' ? ' active' : null ?>">
                                 <a href="<?= site_url('pemasok') ?>"><i class="fa fa-fw fa-truck-moving"></i> Pemasok</a>
                             </li>
-                            <li>
-                                <a href="<?= site_url('admin/member/index') ?>">
-                                    <i class="fa fa-fw fa-users"></i> Member
-                                </a>
+                            <li class="<?= $uri == 'member' ? ' active' : null ?>">
+                                <a href="<?= site_url('member') ?>"><i class="fa fa-fw fa-users"></i> Member</a>
                             </li>
                             <li>
                                 <a href="<?= site_url('biaya/index') ?>">
