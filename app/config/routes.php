@@ -25,6 +25,14 @@ $route['kategori/show'] = 'produk/kategori/show';
 $route['kategori/update'] = 'produk/kategori/update';
 $route['kategori/destroy'] = 'produk/kategori/destroy';
 
+$route['pemasok'] = 'kontak/pemasok';
+$route['pemasok/data'] = 'kontak/pemasok/data';
+$route['pemasok/create'] = 'kontak/pemasok/create';
+$route['pemasok/store'] = 'kontak/pemasok/store';
+$route['pemasok/show'] = 'kontak/pemasok/show';
+$route['pemasok/update'] = 'kontak/pemasok/update';
+$route['pemasok/destroy'] = 'kontak/pemasok/destroy';
+
 $route['beli/(:any)'] = 'admin/pembelian/$1';
 $route['beli/(:any)/(:any)'] = 'admin/pembelian/$1/$2';
 $route['pemasok/(:any)'] = 'admin/pemasok/$1';
