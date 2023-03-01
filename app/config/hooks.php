@@ -12,6 +12,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 
+# Load phpdotenv
+$hook['pre_system'] = function () {
+    require_once BASEPATH . 'dotenv/autoloader.php';
+    $dotenv = new Dotenv\Dotenv(FCPATH);
+    $dotenv->load();
+};
+
 $hook['display_override'] = [
     'filepath' => 'hooks',
     'filename' => 'ViewCompiler.php',
