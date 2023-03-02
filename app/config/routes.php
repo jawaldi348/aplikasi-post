@@ -9,6 +9,7 @@ $route['login'] = 'auth/login';
 $route['login/validasi-user'] = 'auth/login/validasi_user';
 $route['logout'] = 'auth/logout';
 
+$route['produk'] = 'produk/produk';
 $route['produk/home'] = 'produk/home';
 
 $route['satuan'] = 'produk/satuan';
