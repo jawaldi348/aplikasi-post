@@ -1,4 +1,7 @@
 @extends(layouts/index)
+@section(style)
+<link rel="stylesheet" href="<?= assets() ?>plugins/select2/select2.min.css">
+@endsection
 @section(content)
 <div class="col-lg-12">
     <div class="card m-b-30">
@@ -28,4 +31,31 @@
         </div>
     </div>
 </div>
+@endsection
+@section(script)
+<script src="<?= assets() ?>plugins/select2/select2.min.js"></script>
+<script>
+    $(document).ready(function(e) {
+        $('#satuan').select2({
+            placeholder: 'Pilih satuan produk',
+            ajax: {
+                url: BASE_URL + 'satuan/autocomplete',
+                type: 'get',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        search: params.term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+    });
+</script>
 @endsection

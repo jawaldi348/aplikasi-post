@@ -20,6 +20,7 @@ $route['satuan/store'] = 'produk/satuan/store';
 $route['satuan/show'] = 'produk/satuan/show';
 $route['satuan/update'] = 'produk/satuan/update';
 $route['satuan/destroy'] = 'produk/satuan/destroy';
+$route['satuan/autocomplete'] = 'produk/satuan/autocomplete';
 
 $route['kategori'] = 'produk/kategori';
 $route['kategori/data'] = 'produk/kategori/data';

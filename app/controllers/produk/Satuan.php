@@ -119,4 +119,17 @@ class Satuan extends CI_Controller
         }
         echo json_encode($json);
     }
+    public function autocomplete()
+    {
+        $search = $this->input->get('search');
+        $data = $this->Msatuan->autocomplete($search);
+        $json = array();
+        foreach ($data as $row) {
+            $json[] = array(
+                'id' => $row['id_satuan'],
+                'text' => $row['nama_satuan']
+            );
+        }
+        echo json_encode($json);
+    }
 }

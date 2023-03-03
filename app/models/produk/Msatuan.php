@@ -70,4 +70,13 @@ class Msatuan extends CI_Model
     {
         return $this->db->where('id_satuan', $id)->update($this->table, ['status_data' => 0]);
     }
+    public function autocomplete($search)
+    {
+        if (!empty($search)) :
+            $this->db->like('nama_satuan', $search);
+        endif;
+        $this->db->limit(50);
+        $this->db->from($this->table);
+        return $this->db->get()->result_array();
+    }
 }
