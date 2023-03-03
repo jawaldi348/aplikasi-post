@@ -120,6 +120,18 @@ class Kategori extends CI_Controller
         }
         echo json_encode($json);
     }
+    public function store_quick()
+    {
+        $post = $this->input->post(null, TRUE);
+        $idkategori = $this->Mkategori->store_quick($post);
+        $data = $this->Mkategori->get_by_id($idkategori);
+        $json = [
+            'status' => true,
+            'data' => $data,
+            'message' => 'Data kategori berhasil disimpan'
+        ];
+        echo json_encode($json);
+    }
     public function autocomplete()
     {
         $search = $this->input->get('search');

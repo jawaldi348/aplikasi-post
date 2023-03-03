@@ -36,6 +36,9 @@
                 <div class="col-sm-4">
                     <select name="kategori" id="kategori" class="form-control"></select>
                 </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-info btn-round btn-sm create_kategori" title="Tambah Kategori"><i class="fa fa-plus"></i></button>
+                </div>
             </div>
         </div>
     </div>
@@ -101,6 +104,17 @@
         });
     });
 
+    $(document).on('click', '.create_kategori', function(e) {
+        $.post(BASE_URL + 'kategori/create', function(resp) {
+            $('#form-quick').attr('data-quick', 'formKategori');
+            $('#tampil-modal').show();
+            $('#tampil-modal').html(resp);
+            const modalForm = document.querySelector('#modal-form');
+            modalForm.classList.add('animated', 'zoomIn');
+            $('#modal-form').modal('show');
+        });
+    });
+
     $(document).on('submit', '.form_data', function(e) {
         e.preventDefault();
         var form_quick = $('#form-quick').attr('data-quick');
@@ -111,6 +125,28 @@
                 if (resp.status == true) {
                     var newOption = new Option(resp.data.nama_satuan, resp.data.id_satuan, true, true);
                     $('#satuan').append(newOption).trigger('change');
+                    $('#modal-form').modal('hide');
+                    $.toast({
+                        heading: 'Success!',
+                        text: resp.message,
+                        icon: 'success',
+                        loader: true,
+                    });
+                } else {
+                    $.toast({
+                        heading: 'Error!',
+                        text: resp.message,
+                        icon: 'error',
+                        loader: true,
+                    });
+                }
+            });
+        } else if (form_quick == 'formKategori') {
+            $.post(BASE_URL + 'kategori/store-quick', data, function(response) {
+                var resp = eval('(' + response + ')');
+                if (resp.status == true) {
+                    var newOption = new Option(resp.data.nama_kategori, resp.data.id_kategori, true, true);
+                    $('#kategori').append(newOption).trigger('change');
                     $('#modal-form').modal('hide');
                     $.toast({
                         heading: 'Success!',

@@ -30,6 +30,7 @@ $route['kategori/store'] = 'produk/kategori/store';
 $route['kategori/show'] = 'produk/kategori/show';
 $route['kategori/update'] = 'produk/kategori/update';
 $route['kategori/destroy'] = 'produk/kategori/destroy';
+$route['kategori/store-quick'] = 'produk/kategori/store_quick';
 $route['kategori/autocomplete'] = 'produk/kategori/autocomplete';
 
 $route['pemasok'] = 'kontak/pemasok';

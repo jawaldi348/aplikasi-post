@@ -68,6 +68,14 @@ class Mkategori extends CI_Model
     {
         return $this->db->where('id_kategori', $id)->update($this->table, ['status_data' => 0]);
     }
+    public function store_quick($post)
+    {
+        $data = [
+            'nama_kategori' => $post['nama']
+        ];
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
+    }
     public function autocomplete($search)
     {
         if (!empty($search)) :
