@@ -31,6 +31,12 @@
                     <button type="button" class="btn btn-primary btn-round btn-sm create_satuan" title="Tambah Satuan"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Kategori</label>
+                <div class="col-sm-4">
+                    <select name="kategori" id="kategori" class="form-control"></select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
