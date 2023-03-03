@@ -120,6 +120,19 @@ class Kategori extends CI_Controller
         }
         echo json_encode($json);
     }
+    public function autocomplete()
+    {
+        $search = $this->input->get('search');
+        $data = $this->Mkategori->autocomplete($search);
+        $json = array();
+        foreach ($data as $row) {
+            $json[] = array(
+                'id' => $row['id_kategori'],
+                'text' => $row['nama_kategori']
+            );
+        }
+        echo json_encode($json);
+    }
 }
 
 /* End of file Kategori.php */

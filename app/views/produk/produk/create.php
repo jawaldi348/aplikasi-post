@@ -67,6 +67,27 @@
                 cache: true
             }
         });
+
+        $('#kategori').select2({
+            placeholder: 'Pilih kategori produk',
+            ajax: {
+                url: BASE_URL + 'kategori/autocomplete',
+                type: 'get',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        search: params.term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
     });
 
     $(document).on('click', '.create_satuan', function(e) {
