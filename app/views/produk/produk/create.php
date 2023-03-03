@@ -40,6 +40,63 @@
                     <button type="button" class="btn btn-info btn-round btn-sm create_kategori" title="Tambah Kategori"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Stok Yang Tersedia</label>
+                <div class="col-sm-4">
+                    <input type="number" name="stok" id="stok" class="form-control" value="0">
+                </div>
+                <div class="col-sm-6">
+                    <div class="alert alert-info" style="font-style: italic;">- Silahkan Isi Ketersedian Stok Secara Keseluruhan</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Harga Modal/Beli (Rp)</label>
+                <div class="col-sm-4">
+                    <input type="text" name="harga_beli" id="harga_beli" class="form-control" value="0" style="text-align: right;">
+                </div>
+                <div class="col-sm-6">
+                    <div class="alert alert-info" style="font-style: italic;">- Input Harga beli dalam satuan terkecil</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Margin (%)</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input type="text" name="margin" id="margin" class="form-control" value="0" style="text-align: right;">
+                        <div class="input-group-append"><span class="input-group-text">%</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="alert alert-info">- Berikan tanda titik (.) untuk bilangan desimal</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Harga Jual Eceran (Rp)</label>
+                <div class="col-sm-4">
+                    <input type="text" name="harga_jual" id="harga_jual" class="form-control" value="0" style="text-align: right;">
+                </div>
+                <div class="col-sm-6">
+                    <div class="alert alert-info" style="font-style: italic;">- Input Harga Jual Eceran dalam satuan terkecil</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Harga Jual Reseller (Rp)</label>
+                <div class="col-sm-4">
+                    <input type="text" name="harga_grosir" id="harga_grosir" class="form-control" value="0" style="text-align: right;">
+                </div>
+                <div class="col-sm-6">
+                    <div class="alert alert-info" style="font-style: italic;">- Input Harga Jual Reseller dalam satuan terkecil</div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Qty Default Per-Satuan</label>
+                <div class="col-sm-4">
+                    <input type="number" name="jumlah" id="jumlah" class="form-control" value="1">
+                </div>
+                <div class="col-sm-6">
+                    <div class="alert alert-info" style="font-style: italic;">- Isi quantity default berdasarkan satuan yang dipilih. Digunakan untuk transaksi penjualan.</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
