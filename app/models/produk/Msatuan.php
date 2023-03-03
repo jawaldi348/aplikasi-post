@@ -70,6 +70,15 @@ class Msatuan extends CI_Model
     {
         return $this->db->where('id_satuan', $id)->update($this->table, ['status_data' => 0]);
     }
+    public function store_quick($post)
+    {
+        $data = [
+            'nama_satuan' => $post['nama'],
+            'detail_satuan' => $post['detail']
+        ];
+        $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
+    }
     public function autocomplete($search)
     {
         if (!empty($search)) :

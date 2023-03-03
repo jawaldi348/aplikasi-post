@@ -119,6 +119,18 @@ class Satuan extends CI_Controller
         }
         echo json_encode($json);
     }
+    public function store_quick()
+    {
+        $post = $this->input->post(null, TRUE);
+        $idsatuan = $this->Msatuan->store_quick($post);
+        $data = $this->Msatuan->get_by_id($idsatuan);
+        $json = [
+            'status' => true,
+            'data' => $data,
+            'message' => 'Data satuan berhasil disimpan'
+        ];
+        echo json_encode($json);
+    }
     public function autocomplete()
     {
         $search = $this->input->get('search');

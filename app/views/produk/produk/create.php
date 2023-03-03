@@ -27,10 +27,15 @@
                 <div class="col-sm-4">
                     <select name="satuan" id="satuan" class="form-control"></select>
                 </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary btn-round btn-sm create_satuan" title="Tambah Satuan"><i class="fa fa-plus"></i></button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<div id="form-quick" data-quick=""></div>
+<div id="tampil-modal"></div>
 @endsection
 @section(script)
 <script src="<?= assets() ?>plugins/select2/select2.min.js"></script>
@@ -56,6 +61,46 @@
                 cache: true
             }
         });
+    });
+
+    $(document).on('click', '.create_satuan', function(e) {
+        $.post(BASE_URL + 'satuan/create', function(resp) {
+            $('#form-quick').attr('data-quick', 'formSatuan');
+            $('#tampil-modal').show();
+            $('#tampil-modal').html(resp);
+            const modalForm = document.querySelector('#modal-form');
+            modalForm.classList.add('animated', 'zoomIn');
+            $('#modal-form').modal('show');
+        });
+    });
+
+    $(document).on('submit', '.form_data', function(e) {
+        e.preventDefault();
+        var form_quick = $('#form-quick').attr('data-quick');
+        var data = $('.form_data').serialize();
+        if (form_quick == 'formSatuan') {
+            $.post(BASE_URL + 'satuan/store-quick', data, function(response) {
+                var resp = eval('(' + response + ')');
+                if (resp.status == true) {
+                    var newOption = new Option(resp.data.nama_satuan, resp.data.id_satuan, true, true);
+                    $('#satuan').append(newOption).trigger('change');
+                    $('#modal-form').modal('hide');
+                    $.toast({
+                        heading: 'Success!',
+                        text: resp.message,
+                        icon: 'success',
+                        loader: true,
+                    });
+                } else {
+                    $.toast({
+                        heading: 'Error!',
+                        text: resp.message,
+                        icon: 'error',
+                        loader: true,
+                    });
+                }
+            });
+        }
     });
 </script>
 @endsection
