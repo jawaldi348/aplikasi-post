@@ -105,6 +105,7 @@
 @endsection
 @section(script)
 <script src="<?= assets() ?>plugins/select2/select2.min.js"></script>
+<script src="<?= assets() ?>js/autoNumeric.js"></script>
 <script>
     $(document).ready(function(e) {
         $('#satuan').select2({
@@ -147,6 +148,27 @@
                 },
                 cache: true
             }
+        });
+
+        $('#harga_beli').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            mDec: '2'
+        });
+        $('#margin').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            mDec: '2'
+        });
+        $('#harga_jual').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            mDec: '2'
+        });
+        $('#harga_grosir').autoNumeric('init', {
+            aSep: '.',
+            aDec: ',',
+            mDec: '2'
         });
     });
 
