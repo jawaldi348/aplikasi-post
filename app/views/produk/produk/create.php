@@ -19,6 +19,12 @@
                     <input type="text" name="nama" class="form-control" placeholder="Isikan Dengan Lengkap Nama Produk">
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Satuan<sup style="color: red;">*</sup></label>
+                <div class="col-sm-4">
+                    <select name="satuan" id="satuan" class="form-control"></select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
