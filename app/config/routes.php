@@ -11,6 +11,7 @@ $route['logout'] = 'auth/logout';
 
 $route['produk'] = 'produk/produk';
 $route['produk/home'] = 'produk/home';
+$route['produk/create'] = 'produk/produk/create';
 
 $route['satuan'] = 'produk/satuan';
 $route['satuan/data'] = 'produk/satuan/data';

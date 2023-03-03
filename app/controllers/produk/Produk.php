@@ -15,6 +15,13 @@ class Produk extends CI_Controller
         ];
         $this->load->view('produk/produk/index', $data);
     }
+    public function create()
+    {
+        $data = [
+            'title' => 'Tambah Produk',
+        ];
+        $this->load->view('produk/produk/create', $data);
+    }
 }
 
 /* End of file Produk.php */
