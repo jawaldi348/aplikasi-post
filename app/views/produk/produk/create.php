@@ -172,6 +172,28 @@
         });
     });
 
+    $(document).on('keyup', '#margin', function(e) {
+        let margin = $(this).val();
+        let hargaBeli = $('#harga_beli').val();
+        let replace_input = hargaBeli.replace(".", "");
+        hitung_hargajual = parseFloat(replace_input) + ((parseFloat(replace_input) * parseFloat(margin)) / 100);
+        $('#harga_jual').autoNumeric('set', hitung_hargajual);
+    });
+
+    $(document).on('keyup', '#harga_jual', function(e) {
+        let hargaJual = $(this).autoNumeric('get');
+        let hargaBeli = $('#harga_beli').autoNumeric('get');
+
+        let hitunglaba;
+        hitunglaba = parseFloat(hargaJual) - parseFloat(hargaBeli);
+
+        let margin;
+        margin = (hitunglaba / hargaBeli) * 100;
+        if (margin > 0) {
+            $('#margin').autoNumeric('set', margin);
+        }
+    });
+
     $(document).on('click', '.create_satuan', function(e) {
         $.post(BASE_URL + 'satuan/create', function(resp) {
             $('#form-quick').attr('data-quick', 'formSatuan');
