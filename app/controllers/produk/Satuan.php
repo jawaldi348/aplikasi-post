@@ -136,6 +136,7 @@ class Satuan extends CI_Controller
         $search = $this->input->get('search');
         $data = $this->Msatuan->autocomplete($search);
         $json = array();
+        $json[] = ['id' => '0', 'text' => '-'];
         foreach ($data as $row) {
             $json[] = array(
                 'id' => $row['id_satuan'],
