@@ -1,7 +1,7 @@
 <?php
 class Mkategori extends CI_Model
 {
-    var $table = 'produk_kategori';
+    var $table = 'kategori';
     var $column_search = array('nama_kategori');
 
     public function _get_data_query()
