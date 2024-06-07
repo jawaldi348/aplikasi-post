@@ -1,7 +1,7 @@
 <?php
 class Msatuan extends CI_Model
 {
-    var $table = 'produk_satuan';
+    var $table = 'satuan';
     var $column_search = array('nama_satuan');
 
     public function _get_data_query()
