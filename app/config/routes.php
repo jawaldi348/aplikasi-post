@@ -9,6 +9,22 @@ $route['login'] = 'auth/login';
 $route['login/validasi-user'] = 'auth/login/validasi_user';
 $route['logout'] = 'auth/logout';
 
+/**
+ * Modul User
+ */
+$route['users'] = 'users/user';
+$route['users/data'] = 'users/user/data';
+$route['users/create'] = 'users/user/create';
+$route['users/store'] = 'users/user/store';
+$route['users/edit'] = 'users/user/edit';
+$route['users/update'] = 'users/user/update';
+$route['users/destroy'] = 'users/user/destroy';
+
+/**
+ * Group User
+ */
+$route['group-user/autocomplete'] = 'users/group/autocomplete';
+
 $route['produk'] = 'produk/produk';
 $route['produk/home'] = 'produk/home';
 $route['produk/create'] = 'produk/produk/create';

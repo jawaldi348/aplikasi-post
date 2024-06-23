@@ -171,7 +171,7 @@ $group = $session['idgroup']; ?>
                         </ul>
                     </li>
                     <li>
-                        <a href="<?= site_url('admin/manuser') ?>"><i class="fa fa-cogs"></i> Manajemen User</a>
+                        <a href="<?= site_url('users') ?>"><i class="fa fa-cogs"></i> Manajemen User</a>
                     </li>
                     <li>
                         <a href="<?= site_url('utility/index') ?>"><i class="fa fa-fw fa-cogs"></i> Utility</a>
