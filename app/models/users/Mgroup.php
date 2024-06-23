@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Muser extends CI_Model
+class Mgroup extends CI_Model
 {
-    var $table = 'users';
-    var $id = 'id_user';
+    var $table = 'group_user';
+    var $id = 'id_group';
 
-    var $column_search = array('nama_user', 'username');
+    var $column_search = array('kode_group', 'nama_group');
 
     public function _get_data_query()
     {
@@ -15,7 +15,7 @@ class Muser extends CI_Model
         $columnSortOrder = $_POST['order'][0]['dir'];
         $searchValue = $_POST['search']['value'];
 
-        $this->db->from($this->table)->join('group_user', 'id_group=idgroup_user')->where(['users.status_data' => 1]);
+        $this->db->from($this->table)->where(['status_data' => 1]);
         $i = 0;
         foreach ($this->column_search as $item) {
             if ($searchValue) {
@@ -53,46 +53,41 @@ class Muser extends CI_Model
     }
     public function get_by_id($id)
     {
-        return $this->db->from($this->table)->join('group_user', 'id_group=idgroup_user')->where('id_user', $id)->get()->row_array();
+        return $this->db->from($this->table)->where('id_group', $id)->get()->row_array();
     }
-    public function get_by_username($username, $id)
+    public function get_by_kode($kode, $id)
     {
-        return $this->db->from('users')->where('username', $username)->where_not_in('id_user', $id)->count_all_results();
+        return $this->db->from($this->table)->where('kode_group', $kode)->where_not_in('id_group', $id)->count_all_results();
     }
     public function store($post)
     {
         $data = [
-            'nama_user' => $post['nama'],
-            'username' => $post['username'],
-            'password' => password_hash($post['password'], PASSWORD_BCRYPT),
-            'idgroup_user' => $post['group'],
-            'aktif_user' => 1,
-            'created_at' => date('Y-m-d H:i:s'),
+            'nama_group' => $post['nama'],
+            'kode_group' => $post['kode']
         ];
         return $this->db->insert($this->table, $data);
     }
     public function update($post)
     {
-        if (empty($post['password'])) {
-            $data = [
-                'nama_user' => $post['nama'],
-                'username' => $post['username'],
-                'idgroup_user' => $post['group']
-            ];
-        } else {
-            $data = [
-                'nama_user' => $post['nama'],
-                'username' => $post['username'],
-                'password' => password_hash($post['password'], PASSWORD_BCRYPT),
-                'idgroup_user' => $post['group']
-            ];
-        }
+        $data = [
+            'nama_group' => $post['nama'],
+            'kode_group' => $post['kode']
+        ];
         return $this->db->where($this->id, $post['id'])->update($this->table, $data);
     }
     public function destroy($id)
     {
         return $this->db->where($this->id, $id)->update($this->table, ['status_data' => 0]);
     }
+    public function autocomplete($search)
+    {
+        if (!empty($search)) :
+            $this->db->like('nama_group', $search);
+        endif;
+        $this->db->limit(50);
+        $this->db->from('group_user');
+        return $this->db->get()->result_array();
+    }
 }
 
-/* End of file Muser.php */
+/* End of file Mgroup.php */

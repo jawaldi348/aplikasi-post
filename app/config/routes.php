@@ -23,6 +23,13 @@ $route['users/destroy'] = 'users/user/destroy';
 /**
  * Group User
  */
+$route['group-user'] = 'users/group';
+$route['group-user/data'] = 'users/group/data';
+$route['group-user/create'] = 'users/group/create';
+$route['group-user/store'] = 'users/group/store';
+$route['group-user/edit'] = 'users/group/edit';
+$route['group-user/update'] = 'users/group/update';
+$route['group-user/destroy'] = 'users/group/destroy';
 $route['group-user/autocomplete'] = 'users/group/autocomplete';
 
 $route['produk'] = 'produk/produk';

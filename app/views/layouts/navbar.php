@@ -170,8 +170,16 @@ $group = $session['idgroup']; ?>
                             <!-- <li><a href="site_url('laporan/ksf')">Laporan KSF</a></li> -->
                         </ul>
                     </li>
-                    <li>
-                        <a href="<?= site_url('users') ?>"><i class="fa fa-cogs"></i> Manajemen User</a>
+                    <li class="has-submenu <?= in_array($uri, ['users', 'group-user']) ? 'active' : '' ?>">
+                        <a href="#"><i class="fa fa-cogs"></i> Manajemen User</a>
+                        <ul class="submenu">
+                            <li class="<?= $uri == 'users' ? ' active' : null ?>">
+                                <a href="<?= site_url('users') ?>"><i class="fa fa-fw fa-users"></i> User</a>
+                            </li>
+                            <li class="<?= $uri == 'group-user' ? ' active' : null ?>">
+                                <a href="<?= site_url('group-user') ?>"><i class="fa fa-fw fa-object-group"></i> Grup User</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="<?= site_url('utility/index') ?>"><i class="fa fa-fw fa-cogs"></i> Utility</a>
