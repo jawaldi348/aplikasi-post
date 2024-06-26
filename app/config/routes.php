@@ -115,5 +115,9 @@ $route['pengaturan/(:any)/(:any)'] = 'admin/pengaturan/$1/$2';
 $route['pemakaian/(:any)'] = 'admin/pemakaian/$1';
 $route['pemakaian/(:any)/(:any)'] = 'admin/pemakaian/$1/$2';
 
-$route['utility/(:any)'] = 'admin/utility/$1';
-$route['utility/(:any)/(:any)'] = 'admin/utility/$1/$2';
+/**
+ * Modul Backup Database
+ */
+$route['utility'] = 'settings/utility';
+$route['utility/backup'] = 'settings/utility/backup';
+$route['utility/restore'] = 'settings/utility/restore';

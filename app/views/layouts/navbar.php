@@ -181,8 +181,8 @@ $group = $session['idgroup']; ?>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="<?= site_url('utility/index') ?>"><i class="fa fa-fw fa-cogs"></i> Utility</a>
+                    <li class="has-submenu <?= $uri == 'utility' ? 'active' : '' ?>">
+                        <a href="<?= site_url('utility') ?>"><i class="fa fa-fw fa-cogs"></i> Utility</a>
                     </li>
                 </ul>
             <?php elseif ($group == '2') : ?>

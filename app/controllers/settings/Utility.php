@@ -4,30 +4,23 @@ use Ifsnop\Mysqldump\Mysqldump;
 
 class Utility extends CI_Controller
 {
+    var $session;
+    var $upload;
+    var $db;
+
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('masuk') == true && $this->session->userdata('idgrup') == '1') {
-            $this->load->library([
-                'form_validation', 'Bcrypt'
-            ]);
-            return true;
-        } else {
-            redirect('login/logout');
-        }
+        check_logged_in();
     }
-
     public function index()
     {
-        $view = [
-            'menu' => $this->load->view('template/menu', '', TRUE),
-            'judul' => '<i class="fa fa-database"></i> Backup Database',
-            'isi' => $this->load->view('admin/utility/index', '', true)
-
+        $data = [
+            'title' => 'Backup Database',
         ];
-        $this->parser->parse('template/main', $view);
+        $this->load->view('settings/utility', $data);
     }
-    public function backup_db()
+    public function backup()
     {
         // $this->load->dbutil();
         // $tanggal = date('dmY');
@@ -57,22 +50,20 @@ class Utility extends CI_Controller
         try {
             $tglSekarang = date('dmY');
             $pesanSukses = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <strong>Berhasil</strong> Database berhasil di backup
-                            </div>';
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong>Berhasil</strong> Database berhasil di backup
+            </div>';
             $dump = new Mysqldump('mysql:host=localhost;dbname=dbkopmart;port=3306', 'root', '');
             $dump->start('database/backup/dbbackup-' . $tglSekarang . '.sql');
             $this->session->set_flashdata('pesan', $pesanSukses);
-
-            redirect('utility/index', 'refresh');
+            redirect('utility', 'refresh');
         } catch (\Exception $e) {
             echo 'mysqldump-php error: ' . $e->getMessage();
         }
     }
-
-    public function restore_database()
+    public function restore()
     {
         //upload file        
         $this->load->helper('file');
@@ -101,11 +92,11 @@ class Utility extends CI_Controller
                 }
                 unlink($direktori);
                 $pesanSukses = '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                    <strong>Berhasil</strong> Data berhasil di restore
-                                </div>';
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Berhasil</strong> Data berhasil di restore
+                </div>';
                 $this->session->set_flashdata('pesanrestore', $pesanSukses);
                 redirect('utility/index', 'refresh');
             }
