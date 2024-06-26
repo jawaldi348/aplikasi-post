@@ -12,3 +12,12 @@ if (!function_exists('check_logged_in')) {
         endif;
     }
 }
+
+if (!function_exists('iduser')) {
+    function iduser()
+    {
+        $CI = &get_instance();
+        $session = $CI->session->userdata('userData');
+        return $session['iduser'];
+    }
+}

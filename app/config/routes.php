@@ -121,3 +121,14 @@ $route['pemakaian/(:any)/(:any)'] = 'admin/pemakaian/$1/$2';
 $route['utility'] = 'settings/utility';
 $route['utility/backup'] = 'settings/utility/backup';
 $route['utility/restore'] = 'settings/utility/restore';
+
+/**
+ * Modul Profil
+ */
+$route['profil'] = 'settings/profil';
+$route['profil/change-image'] = 'settings/profil/change_image';
+$route['profil/update-image'] = 'settings/profil/update_image';
+$route['profil/change-profil'] = 'settings/profil/change_profil';
+$route['profil/update-profil'] = 'settings/profil/update_profil';
+$route['profil/change-password'] = 'settings/profil/change_password';
+$route['profil/update-password'] = 'settings/profil/update_password';

@@ -59,6 +59,23 @@ class Muser extends CI_Model
     {
         return $this->db->from('users')->where('username', $username)->where_not_in('id_user', $id)->count_all_results();
     }
+    public function get_by_param($id)
+    {
+        $query = $this->db->from($this->table)->join('group_user', 'id_group=idgroup_user')->where('id_user', $id)->get()->row_array();
+        if ($query['foto_user'] == NULL || $query['foto_user'] == '' || !file_exists('uploads/' . $query['foto_user'])) :
+            $image = base_url() . 'assets/images/users/avatar.png';
+        else :
+            $image = base_url() . 'uploads/' . $query['foto_user'];
+        endif;
+        $data = [
+            'iduser' => $query['id_user'],
+            'username' => $query['username'],
+            'nama' => $query['nama_user'],
+            'group' => $query['nama_group'],
+            'image' => $image
+        ];
+        return $data;
+    }
     public function store($post)
     {
         $data = [
@@ -92,6 +109,28 @@ class Muser extends CI_Model
     public function destroy($id)
     {
         return $this->db->where($this->id, $id)->update($this->table, ['status_data' => 0]);
+    }
+
+    // Update Foto User
+    public function update_image($post)
+    {
+        $iduser = iduser();
+        return $this->db->where($this->id, $iduser)->update($this->table, ['foto_user' => $post['path_foto']]);
+    }
+    // Update Profil
+    public function update_profil($post)
+    {
+        $iduser = iduser();
+        $data = [
+            'nama_user' => $post['nama'],
+            'username' => $post['username']
+        ];
+        return $this->db->where($this->id, $iduser)->update($this->table, $data);
+    }
+    public function update_password($post)
+    {
+        $iduser = iduser();
+        return $this->db->where($this->id, $iduser)->update($this->table, ['password' => password_hash($post['NewPassword2'], PASSWORD_BCRYPT)]);
     }
 }
 

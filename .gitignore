@@ -74,6 +74,9 @@ db_backup/
 .env.testing
 .env.production
 
+# Uploads
+uploads/
+
 # assets
 assets/barcode/
 
