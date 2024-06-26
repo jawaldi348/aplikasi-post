@@ -7,7 +7,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open($post, ['autocomplete' => 'off', 'class' => 'form_data']) ?>
+            <?php if (isset($multipart) == 1) :
+                echo form_open_multipart($post, ['class' => 'form_data', 'autocomplete' => 'off']);
+            else :
+                echo form_open($post, ['class' => 'form_data', 'autocomplete' => 'off']);
+            endif; ?>
             <div class="modal-body">
                 <?= $body ?>
             </div>
