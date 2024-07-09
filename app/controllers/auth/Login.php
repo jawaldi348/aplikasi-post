@@ -3,6 +3,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Login extends CI_Controller
 {
+    var $input;
+    var $form_validation;
+    var $session;
+    var $common;
+    var $Mlogin;
+
     public function __construct()
     {
         parent::__construct();
@@ -10,7 +16,8 @@ class Login extends CI_Controller
     }
     public function index()
     {
-        $this->load->view('auth/login');
+        $data['bisnis'] = $this->common->get_bisnis();
+        $this->load->view('auth/login', $data);
     }
     public function validasi_user()
     {
