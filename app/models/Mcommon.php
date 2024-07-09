@@ -9,7 +9,7 @@ class Mcommon extends CI_Model
         $data = [
             'idbisnis' => $sql['id_bisnis'],
             'bisnis' => $sql['nama_bisnis'],
-            'logo' => $sql['logo_bisnis'] == '' || !file_exists('app_content/' . $sql['logo_bisnis']) ? '' : base_url() . 'app_content/' . $sql['logo_bisnis']
+            'logo' => $sql['logo_bisnis'] == '' || !file_exists('uploads/' . $sql['logo_bisnis']) ? '' : base_url() . 'uploads/' . $sql['logo_bisnis']
         ];
         return $data;
     }
