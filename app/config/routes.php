@@ -116,6 +116,13 @@ $route['pemakaian/(:any)'] = 'admin/pemakaian/$1';
 $route['pemakaian/(:any)/(:any)'] = 'admin/pemakaian/$1/$2';
 
 /**
+ * Modul Profil Bisnis
+ */
+$route['profil-bisnis'] = 'settings/bisnis';
+$route['profil-bisnis/edit'] = 'settings/bisnis/edit';
+$route['profil-bisnis/update'] = 'settings/bisnis/update';
+
+/**
  * Modul Backup Database
  */
 $route['utility'] = 'settings/utility';
