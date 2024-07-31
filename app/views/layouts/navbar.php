@@ -71,26 +71,6 @@ $group = $session['idgroup']; ?>
                             </li>
                         </ul>
                     </li>
-                    <li class="has-submenu <?= $uri == 'kaskecil' ? 'active' : '' ?>">
-                        <a href="#"><i class="fa fa-cogs"></i> Setting </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?= site_url('admin/toko/index') ?>"><i class="fa fa-store-alt"></i> Nama Toko</a>
-                            </li>
-                            <li>
-                                <a href="<?= site_url('neraca/input-awal') ?>"><i class="fa fa-newspaper"></i> Input Awal Neraca</a>
-                            </li>
-                            <li>
-                                <a href="<?= site_url('setting-diskon-member/index') ?>"><i class="fa fa-tasks"></i> Diskon Member</a>
-                            </li>
-                            <li>
-                                <a href="<?= site_url('pengaturan/index') ?>"><i class="fa fa-tasks"></i> Pengaturan Lainnya</a>
-                            </li>
-                            <!-- <li> -->
-                            <!-- <a href="site_url('admin/kaskecil/index')"><i class="fa fa-comments-dollar"></i> Kas Kecil</a> -->
-                            <!-- </li> -->
-                        </ul>
-                    </li>
                     <li class="has-submenu">
                         <a href="#"><i class="fa fa-file-archive"></i> Report</a>
                         <ul class="submenu">
@@ -181,8 +161,29 @@ $group = $session['idgroup']; ?>
                             </li>
                         </ul>
                     </li>
-                    <li class="has-submenu <?= $uri == 'utility' ? 'active' : '' ?>">
-                        <a href="<?= site_url('utility') ?>"><i class="fa fa-fw fa-cogs"></i> Utility</a>
+                    <li class="has-submenu <?= in_array($uri, ['profil-bisnis', 'utility']) ? 'active' : '' ?>">
+                        <a href="#"><i class="fa fa-cogs"></i> Pengaturan</a>
+                        <ul class="submenu">
+                            <li class="<?= $uri == 'profil-bisnis' ? ' active' : null ?>">
+                                <a href="<?= site_url('profil-bisnis') ?>"><i class="fa fa-store-alt"></i> Toko Anda</a>
+                            </li>
+                            <li>
+                                <a href="<?= site_url('neraca/input-awal') ?>"><i class="fa fa-newspaper"></i> Input Awal Neraca</a>
+                            </li>
+                            <li>
+                                <a href="<?= site_url('setting-diskon-member/index') ?>"><i class="fa fa-tasks"></i> Diskon Member</a>
+                            </li>
+                            <li>
+                                <a href="<?= site_url('pengaturan/index') ?>"><i class="fa fa-tasks"></i> Pengaturan Lainnya</a>
+                            </li>
+                            <!-- <li> -->
+                            <!-- <a href="site_url('admin/kaskecil/index')"><i class="fa fa-comments-dollar"></i> Kas Kecil</a> -->
+                            <!-- </li> -->
+                            <li class="dropdown-divider"></li>
+                            <li class="<?= $uri == 'utility' ? ' active' : null ?>">
+                                <a href="<?= site_url('utility') ?>"><i class="fa fa-fw fa-cogs"></i> Backup DB</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             <?php elseif ($group == '2') : ?>
